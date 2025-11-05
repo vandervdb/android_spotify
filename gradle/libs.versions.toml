@@ -23,6 +23,11 @@ datastore = "1.1.1"
 junit = "4.13.2"
 junitExt = "1.2.1"
 espresso = "3.6.1"
+# Tests
+mockk = "1.13.13"
+coroutines = "1.8.1"
+turbine = "1.1.0"
+slf4j = "2.0.16"
 
 
 [libraries]
@@ -30,6 +35,13 @@ espresso = "3.6.1"
 # Core AndroidX
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+# Test libs
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 
 # Lifecycle
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntime" }

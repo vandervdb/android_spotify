@@ -10,8 +10,8 @@ fun PlayerState.toPlayerStateData(): PlayerStateData {
     return PlayerStateData(
         trackName = track?.name ?: "Unknown Track",
         artistName = track?.artist?.name ?: "Unknown Artist",
-        coverId = track.imageUri.toString().extractSpotifyCoverIdOrNull() ?: "",
-        trackId = track.uri.toString().extractSpotifyTrackIdOrNull() ?: "",
+        coverId = track?.imageUri?.toString()?.extractSpotifyCoverIdOrNull() ?: "",
+        trackId = track?.uri?.toString()?.extractSpotifyTrackIdOrNull() ?: "",
         isPaused = isPaused,
         playing = !isPaused,
         paused = isPaused,

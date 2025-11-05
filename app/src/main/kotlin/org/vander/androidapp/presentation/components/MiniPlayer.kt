@@ -80,16 +80,15 @@ private fun MiniPlayerContent(
 ) {
 
     val pagerState = rememberPagerState(pageCount = { tracksQueue.size })
-    val currentTrackId = trackId
-    val currentTrackIndex = tracksQueue.indexOfFirst { it.trackId == currentTrackId }
+    val currentTrackIndex = tracksQueue.indexOfFirst { it.trackId == trackId }
 
     var miniplayerSize by remember { mutableIntStateOf(0) }
 
     /* Workaround to prevent the swipe gesture callback (playTrack(newTrackId)) to be triggered */
     var suppressSwipeCallback by remember { mutableStateOf(false) }
 
-    LaunchedEffect(currentTrackId) {
-        val index = tracksQueue.indexOfFirst { it.trackId == currentTrackId }
+    LaunchedEffect(trackId) {
+        val index = tracksQueue.indexOfFirst { it.trackId == trackId }
         if (index >= 0 && index != pagerState.currentPage) {
             suppressSwipeCallback = true
             pagerState.animateScrollToPage(index)
@@ -101,7 +100,7 @@ private fun MiniPlayerContent(
     LaunchedEffect(pagerState.currentPage) {
         if (!suppressSwipeCallback) {
             val newTrackId = tracksQueue.getOrNull(pagerState.currentPage)?.trackId
-            if (newTrackId != null && newTrackId != currentTrackId) {
+            if (newTrackId != null && newTrackId != trackId) {
                 Log.d("MiniPlayer", "Swiped to trackId=$newTrackId")
                 val newTrackIndex = tracksQueue.indexOfFirst { it.trackId == newTrackId }
                 if (currentTrackIndex > newTrackIndex) {
