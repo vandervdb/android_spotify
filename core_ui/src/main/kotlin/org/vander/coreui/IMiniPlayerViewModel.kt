@@ -2,14 +2,14 @@ package org.vander.coreui
 
 import android.app.Activity
 import kotlinx.coroutines.flow.StateFlow
-import org.vander.spotifyclient.domain.state.SpotifyPlayerState
-import org.vander.spotifyclient.domain.state.SpotifySessionState
+import org.vander.spotifyclient.domain.state.PlayerState
+import org.vander.spotifyclient.domain.state.SessionState
 import org.vander.spotifyclient.domain.state.UIQueueState
 
 interface IMiniPlayerViewModel {
-    val sessionState: StateFlow<SpotifySessionState>
+    val sessionState: StateFlow<SessionState>
     val uIQueueState: StateFlow<UIQueueState>
-    val spotifyPlayerState: StateFlow<SpotifyPlayerState>
+    val playerState: StateFlow<PlayerState>
     fun startUp(activity: Activity)
     fun togglePlayPause()
     fun skipNext()

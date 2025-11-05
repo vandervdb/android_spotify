@@ -15,7 +15,7 @@ import org.vander.coreui.IMiniPlayerViewModel
 import org.vander.spotifyclient.domain.SpotifySessionManager
 import org.vander.spotifyclient.domain.data.SpotifyPlaylistsResponse
 import org.vander.spotifyclient.domain.repository.SpotifyLibraryRepository
-import org.vander.spotifyclient.domain.state.SpotifyPlayerState
+import org.vander.spotifyclient.domain.state.PlayerState
 import org.vander.spotifyclient.domain.usecase.SpotifyUseCase
 import javax.inject.Inject
 
@@ -30,8 +30,8 @@ open class SpotifyViewModel @Inject constructor(
         private const val TAG = "SpotifyViewModel"
     }
 
-    override val spotifyPlayerState: StateFlow<SpotifyPlayerState> =
-        spotifyUseCase.spotifyPlayerState
+    override val playerState: StateFlow<PlayerState> =
+        spotifyUseCase.playerState
 
     override val sessionState = sessionManager.sessionState
 
@@ -55,7 +55,7 @@ open class SpotifyViewModel @Inject constructor(
     }
 
     override fun toggleSaveTrack(trackId: String) {
-        val isSaved = spotifyPlayerState.value.isTrackSaved
+        val isSaved = playerState.value.isTrackSaved
         val action = if (isSaved == true) ::removeTrackFromSaved else ::saveTrack
         Log.d(TAG, "toggleSaveTrack: $isSaved")
         action(trackId)

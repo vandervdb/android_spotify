@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.vander.spotifyclient.domain.data.CurrentlyPlayingAndQueue
+import org.vander.spotifyclient.domain.data.CurrentlyPlaying
 import org.vander.spotifyclient.domain.repository.SpotifyQueueRepository
 import javax.inject.Inject
 
@@ -17,8 +17,8 @@ class SpotifyRemoteUseCase @Inject constructor(
         private const val TAG = "SpotifyRemoteUseCase"
     }
 
-    private val _currentUserQueue = MutableStateFlow<CurrentlyPlayingAndQueue?>(null)
-    val currentUserQueue: StateFlow<CurrentlyPlayingAndQueue?> = _currentUserQueue.asStateFlow()
+    private val _currentUserQueue = MutableStateFlow<CurrentlyPlaying?>(null)
+    val currentUserQueue: StateFlow<CurrentlyPlaying?> = _currentUserQueue.asStateFlow()
 
     suspend fun getAndEmitUserQueueFlow() {
         queueRepository.getUserQueue().fold(

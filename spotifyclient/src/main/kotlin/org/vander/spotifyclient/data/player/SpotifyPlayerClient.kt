@@ -14,6 +14,14 @@ import org.vander.spotifyclient.domain.state.PlayerConnectionState
 import org.vander.spotifyclient.domain.state.PlayerStateData
 import javax.inject.Inject
 
+/**
+ * A client for interacting with the Spotify player.
+ *
+ * This class provides methods for controlling playback, subscribing to player state updates,
+ * and managing the connection to the Spotify app.
+ *
+ * @property appRemoteProvider An [ISpotifyAppRemoteProvider] instance used to access the Spotify App Remote.
+ */
 class SpotifyPlayerClient @Inject constructor(
     private val appRemoteProvider: ISpotifyAppRemoteProvider,
 ) : ISpotifyPlayerClient {

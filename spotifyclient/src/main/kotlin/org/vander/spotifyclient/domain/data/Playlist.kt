@@ -1,7 +1,7 @@
 package org.vander.spotifyclient.domain.data
 
 
-data class SpotifyPlaylist(
+data class Playlist(
     val id: String,
     val name: String,
     val imageUrl: String

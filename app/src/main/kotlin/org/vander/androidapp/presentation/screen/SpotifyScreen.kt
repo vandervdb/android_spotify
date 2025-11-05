@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.vander.androidapp.presentation.components.MiniPlayer
 import org.vander.coreui.IMiniPlayerViewModel
-import org.vander.spotifyclient.domain.state.SpotifySessionState
+import org.vander.spotifyclient.domain.state.SessionState
 
 
 @Composable
@@ -42,32 +42,32 @@ fun SpotifyScreen(
     ) {
         Log.d(tag, "Session state: $sessionState")
         when (sessionState) {
-            is SpotifySessionState.Idle -> {
+            is SessionState.Idle -> {
                 Log.d(tag, "Idle...")
             }
 
-            is SpotifySessionState.Authorizing -> {
+            is SessionState.Authorizing -> {
                 Log.d(tag, "Authorizing...")
             }
 
-            is SpotifySessionState.ConnectingRemote -> {
+            is SessionState.ConnectingRemote -> {
                 Log.d(tag, "Connecting to remote...")
                 CircularProgressIndicator()
             }
 
-            is SpotifySessionState.Ready -> {
+            is SessionState.Ready -> {
                 Text("✅ Connecté à Spotify Remote !")
                 MiniPlayer(viewModel)
             }
 
-            is SpotifySessionState.Failed -> {
+            is SessionState.Failed -> {
                 Text(
-                    text = "❌ Erreur: ${(sessionState as SpotifySessionState.Failed).exception.message}",
+                    text = "❌ Erreur: ${(sessionState as SessionState.Failed).exception.message}",
                     color = MaterialTheme.colorScheme.error
                 )
             }
 
-            SpotifySessionState.IsPaused -> TODO()
+            SessionState.IsPaused -> TODO()
         }
 
     }

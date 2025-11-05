@@ -4,12 +4,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SpotifyErrorResponseDto(
-    @SerialName("error") val error: SpotifyErrorDetailDto
+data class ErrorResponseDto(
+    @SerialName("error") val error: ErrorDetailDto
 )
 
 @Serializable
-data class SpotifyErrorDetailDto(
+data class ErrorDetailDto(
     @SerialName("status") val status: Int,
     @SerialName("message") val message: String
 )

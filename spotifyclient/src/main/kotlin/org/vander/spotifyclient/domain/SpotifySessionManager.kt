@@ -7,10 +7,10 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
-import org.vander.spotifyclient.domain.state.SpotifySessionState
+import org.vander.spotifyclient.domain.state.SessionState
 
 interface SpotifySessionManager {
-    val sessionState: StateFlow<SpotifySessionState>
+    val sessionState: StateFlow<SessionState>
 
     fun requestAuthorization(launchAuth: ActivityResultLauncher<Intent>)
     fun launchAuthorizationFlow(activity: Activity)

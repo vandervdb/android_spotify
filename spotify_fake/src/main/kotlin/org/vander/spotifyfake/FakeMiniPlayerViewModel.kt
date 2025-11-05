@@ -3,18 +3,14 @@ package org.vander.spotifyfake
 import android.app.Activity
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.vander.coreui.IMiniPlayerViewModel
-import org.vander.spotifyclient.domain.state.PlayerStateData
-import org.vander.spotifyclient.domain.state.SpotifyPlayerState
-import org.vander.spotifyclient.domain.state.SpotifySessionState
-import org.vander.spotifyclient.domain.state.UIQueueState
-import org.vander.spotifyclient.domain.state.togglePause
+import org.vander.spotifyclient.domain.state.*
 
 
 class FakeMiniPlayerViewModel : IMiniPlayerViewModel {
-    override val sessionState = MutableStateFlow<SpotifySessionState>(SpotifySessionState.Ready)
+    override val sessionState = MutableStateFlow<SessionState>(SessionState.Ready)
     override val uIQueueState = MutableStateFlow<UIQueueState>(UIQueueState.empty())
-    override val spotifyPlayerState = MutableStateFlow<SpotifyPlayerState>(
-        SpotifyPlayerState(
+    override val playerState = MutableStateFlow<PlayerState>(
+        PlayerState(
             base = PlayerStateData(
                 trackName = "Zelda's Theme",
                 artistName = "Koji Kondo",
@@ -40,7 +36,7 @@ class FakeMiniPlayerViewModel : IMiniPlayerViewModel {
     }
 
     override fun togglePlayPause() {
-        spotifyPlayerState.togglePause()
+        playerState.togglePause()
     }
 
     override fun skipNext() {

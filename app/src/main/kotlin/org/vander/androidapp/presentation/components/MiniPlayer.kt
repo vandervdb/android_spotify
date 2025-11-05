@@ -2,15 +2,7 @@ package org.vander.androidapp.presentation.components
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.PagerState
@@ -20,19 +12,8 @@ import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -42,7 +23,7 @@ import kotlinx.coroutines.delay
 import org.vander.androidapp.presentation.components.preview.PreviewMiniPlayerWithLocalCover
 import org.vander.coreui.IMiniPlayerViewModel
 import org.vander.spotifyclient.domain.data.UIQueueItem
-import org.vander.spotifyclient.domain.state.SpotifySessionState
+import org.vander.spotifyclient.domain.state.SessionState
 import org.vander.spotifyclient.domain.state.coverId
 import org.vander.spotifyclient.domain.state.isPaused
 import org.vander.spotifyclient.domain.state.trackId
@@ -50,10 +31,10 @@ import org.vander.spotifyclient.domain.state.trackId
 @Composable
 fun MiniPlayer(viewModel: IMiniPlayerViewModel) {
     val sessionState by viewModel.sessionState.collectAsState()
-    val playerState by viewModel.spotifyPlayerState.collectAsState()
+    val playerState by viewModel.playerState.collectAsState()
     val uIQueueState by viewModel.uIQueueState.collectAsState()
 
-    if (sessionState is SpotifySessionState.Ready) {
+    if (sessionState is SessionState.Ready) {
         Log.d("MiniPlayer", "Session is ready")
         Log.d("MiniPlayer", "Player state: $playerState")
         Log.d("MiniPlayer", "Queue state: $uIQueueState")
@@ -214,10 +195,10 @@ fun MiniPlayerWithPainter(
     coverPainter: Painter
 ) {
     val sessionState by viewModel.sessionState.collectAsState()
-    val playerState by viewModel.spotifyPlayerState.collectAsState()
+    val playerState by viewModel.playerState.collectAsState()
     val uIQueueState by viewModel.uIQueueState.collectAsState()
 
-    if (sessionState is SpotifySessionState.Ready) {
+    if (sessionState is SessionState.Ready) {
         MiniPlayerContent(
             tracksQueue = uIQueueState.items,
             trackId = playerState.trackId,

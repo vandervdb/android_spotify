@@ -1,6 +1,6 @@
 package org.vander.spotifyclient.domain.data
 
-data class SpotifyArtist(
+data class Artist(
     val externalUrls: String,
     val href: String,
     val id: String,

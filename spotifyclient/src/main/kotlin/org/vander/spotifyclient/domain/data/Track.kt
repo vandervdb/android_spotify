@@ -1,8 +1,8 @@
 package org.vander.spotifyclient.domain.data
 
-class SpotifyTrack(
-    val album: SpotifyAlbum,
-    val artists: List<SpotifyArtist>,
+class Track(
+    val album: Album,
+    val artists: List<Artist>,
     val availableMarkets: List<String>,
     val discNumber: Int,
     val durationMs: Int,
@@ -18,9 +18,9 @@ class SpotifyTrack(
     val uri: String,
 ) {
     companion object {
-        fun empty(): SpotifyTrack {
-            return SpotifyTrack(
-                album = SpotifyAlbum.empty(),
+        fun empty(): Track {
+            return Track(
+                album = Album.empty(),
                 artists = emptyList(),
                 availableMarkets = emptyList(),
                 discNumber = 0,

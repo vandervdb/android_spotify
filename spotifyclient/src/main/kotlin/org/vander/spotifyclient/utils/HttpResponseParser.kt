@@ -1,11 +1,10 @@
 package org.vander.spotifyclient.utils
 
 import android.util.Log
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
+import io.ktor.client.statement.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
-import org.vander.spotifyclient.data.remote.dto.SpotifyErrorResponseDto
+import org.vander.spotifyclient.data.remote.dto.ErrorResponseDto
 
 suspend inline fun <reified T> HttpResponse.parseSpotifyResult(
     tag: String = "SpotifyApi"
@@ -17,7 +16,7 @@ suspend inline fun <reified T> HttpResponse.parseSpotifyResult(
         val root = json.parseToJsonElement(rawBody).jsonObject
 
         if ("error" in root) {
-            val errorDto = json.decodeFromString<SpotifyErrorResponseDto>(rawBody)
+            val errorDto = json.decodeFromString<ErrorResponseDto>(rawBody)
             Log.e(tag, "Spotify error ${errorDto.error.status} : ${errorDto.error.message}")
             Result.failure(Exception("Spotify error ${errorDto.error.status}: ${errorDto.error.message}"))
         } else {

@@ -1,8 +1,8 @@
 # 🎧 android-compose-spotify
 
 <p align="center">
-  <strong>Application Spotify en Jetpack Compose avec architecture modulaire</strong><br />
-  <em>Scalable, typée, prête pour la prod.</em>
+  <strong>Spotify app built with Jetpack Compose and a modular architecture</strong><br />
+  <em>Scalable, strongly typed, production‑ready.</em>
 </p>
 
 <p align="center">
@@ -13,108 +13,108 @@
 
 ---
 
-## 🚀 Aperçu
+## 🚀 Overview
 
-Application mobile utilisant les dernières stacks techniques.
-L'application utilise l'API Spotify pour la connexion et la gestion dun lecteur audio.
+Mobile application using a modern Android stack.
+The app uses the Spotify API for sign‑in and to control the audio player.
 
-Projet Android construit avec :
+Android project built with:
 
 - 🖌️ **Jetpack Compose**
-- 🗄️ **DataStore** pour le stockage local
+- 🗄️ **DataStore** for local storage
 - 🔌 **Spotify Remote SDK**
-- 🧩 **Hilt** pour l'injection de dépendances
-- 🔄 **Ktor** pour les appels réseau
-- 🧱 Multi-modules (\`core_ui\`, \`spotifyclient\`, etc.)
+- 🧩 **Hilt** for dependency injection
+- 🔄 **Ktor** for networking
+- 🧱 Multi‑module setup (`core_ui`, `spotifyclient`, etc.)
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project structure
 
 ```bash
 AndroidApp/
-├── app/                    # Application principale Compose
-├── core_ui/                # Composants et interfaces UI
-├── spotifyclient/          # Client Spotify (auth + remote)
-├── spotifyclient-fake/     # Implémentations Fake des clients Spotify
-├── spotify_fake/           # ViewModel MiniPlayer factice
+├── app/                    # Main Compose application
+├── core_ui/                # UI components and MiniPlayer contracts
+├── spotifyclient/          # Spotify client (auth + remote control)
+├── spotifyclient-fake/     # Fake implementations of Spotify clients
+├── spotify_fake/           # Fake MiniPlayer ViewModel and data for the UI
 ```
 
 ---
 
-## 🛠️ Installation & lancement
+## 🛠️ Build & run
 
 ```bash
-# Compiler l'application
+# Build the app
 ./gradlew assembleDebug
 
-# Lancer sur un émulateur connecté
+# Install to a connected emulator/device
 ./gradlew installDebug
 ```
 
 ---
 
-## ⚙️ Configuration des secrets
+## ⚙️ Secrets configuration
 
-Créez un fichier `local.properties` à la racine du projet contenant :
+Create a `local.properties` file at the project root with:
 
 ```properties
 CLIENT_ID=your-spotify-client-id
 CLIENT_SECRET=your-spotify-client-secret
 ```
 
-Ces valeurs sont chargées durant la compilation pour générer les constantes `BuildConfig` utilisées par `spotifyclient`.
+These values are loaded at build time to generate `BuildConfig` constants used by `spotifyclient`.
 
 ---
 
-## 🧱 Ajout de module partagé
+## 🧱 Adding a shared module
 
 ```bash
-# Exemple : création d'un module "nouvelle-lib"
-./gradlew :nouvelle-lib:assembleDebug
+# Example: create a new module "new-lib"
+./gradlew :new-lib:assembleDebug
 ```
 
-Déclarez le module dans `settings.gradle.kts` pour l'inclure au projet.
+Declare the module in `settings.gradle.kts` to include it in the project.
 
 ---
 
-## 🧪 Tests (à venir)
+## 🧪 Tests (coming soon)
 
-> Des tests unitaires et instrumentés seront ajoutés pour chaque module.
+> Unit and instrumented tests will be added for each module.
 
 ---
 
 <details>
-<summary>📦 Modules & librairies utilisés</summary>
+<summary>📦 Modules & libraries used</summary>
 
-| Module/librairie       | Description                                             |
-| ---------------------- | ------------------------------------------------------- |
-| `app`                  | Application Android Jetpack Compose                     |
-| `core_ui`              | UI commune et contrats du MiniPlayer                    |
-| `spotifyclient`        | Connexion Spotify Remote & authentification             |
-| `spotifyclient-fake`   | Fakes pour tester sans Spotify                          |
-| `spotify_fake`         | ViewModel et données factices pour l'UI                 |
+| Module/Library       | Description                                |
+|----------------------|--------------------------------------------|
+| `app`                | Android app using Jetpack Compose          |
+| `core_ui`            | Shared UI and MiniPlayer contracts         |
+| `spotifyclient`      | Spotify Remote connection & authentication |
+| `spotifyclient-fake` | Fakes to test without Spotify              |
+| `spotify_fake`       | Fake ViewModel and data for the UI         |
 
 </details>
 
 ---
 
-## ✨ À venir
+## ✨ Roadmap
 
-- 🌟 Intégration complète du lecteur Spotify
-- 🔄 Refresh token automatique
-- 🧪 Tests unitaires + e2e
-- 🎨 Amélioration de l'interface Material3
+- 🌟 Full Spotify player integration
+- 🔄 Automatic token refresh
+- 🧪 Unit + e2e tests
+- 🎨 Material 3 UI improvements
 
 ---
 
-## 👨‍💻 Auteur
+## 👨‍💻 Author
 
-Développé par **Arnaud Vanderbecq**  
+Developed by **Arnaud Vanderbecq**  
 [GitHub](https://github.com/vandervdb) · [LinkedIn](https://linkedin.com/in/avanderbecq)
 
 ---
 
-## 🪪 Licence
+## 🪪 License
 
 MIT

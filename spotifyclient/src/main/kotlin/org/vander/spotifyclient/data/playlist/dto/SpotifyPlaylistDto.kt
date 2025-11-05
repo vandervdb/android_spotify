@@ -10,7 +10,7 @@ data class SpotifyPlaylistDto(
     @SerialName("external_urls") val externalUrls: ExternalUrlsDto,
     val href: String,
     val id: String,
-    val images: List<SpotifyImageDto>,
+    val images: List<ImageDto>,
     val name: String,
     val owner: SpotifyOwnerDto,
     val public: Boolean? = null,
@@ -42,7 +42,7 @@ data class SpotifyTracksDto(
 )
 
 @Serializable
-data class SpotifyImageDto(
+data class ImageDto(
     val url: String,
     val height: Int? = null,
     val width: Int? = null

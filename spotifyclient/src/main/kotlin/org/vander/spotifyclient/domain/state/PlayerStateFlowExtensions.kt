@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * @param transform a function that takes the current state of the [MutableStateFlow]
  *                  and returns the new state.
  */
-inline fun MutableStateFlow<SpotifyPlayerState>.update(
-    transform: (SpotifyPlayerState) -> SpotifyPlayerState
+inline fun MutableStateFlow<PlayerState>.update(
+    transform: (PlayerState) -> PlayerState
 ) {
     value = transform(value)
 }
@@ -33,9 +33,9 @@ inline fun MutableStateFlow<SpotifyPlayerState>.update(
  * @param predicate A function that determines whether the update should occur based on the current value.
  * @param transform A function that transforms the current value into the new value if the predicate is true.
  */
-inline fun MutableStateFlow<SpotifyPlayerState>.updateIf(
-    predicate: (SpotifyPlayerState) -> Boolean,
-    transform: (SpotifyPlayerState) -> SpotifyPlayerState
+inline fun MutableStateFlow<PlayerState>.updateIf(
+    predicate: (PlayerState) -> Boolean,
+    transform: (PlayerState) -> PlayerState
 ) {
     val current = value
     if (predicate(current)) {
@@ -43,18 +43,18 @@ inline fun MutableStateFlow<SpotifyPlayerState>.updateIf(
     }
 }
 
-fun MutableStateFlow<SpotifyPlayerState>.togglePause() {
+fun MutableStateFlow<PlayerState>.togglePause() {
     update {
         val newBase = it.base.copy(isPaused = !it.base.isPaused)
         it.copyWithBase(newBase)
     }
 }
 
-fun MutableStateFlow<SpotifyPlayerState>.setTrackSaved(isSaved: Boolean) {
+fun MutableStateFlow<PlayerState>.setTrackSaved(isSaved: Boolean) {
     update { it.copyWithSaved(isSaved) }
 }
 
-fun MutableStateFlow<SpotifyPlayerState>.setTrack(trackId: String) {
+fun MutableStateFlow<PlayerState>.setTrack(trackId: String) {
     update {
         val newBase = it.base.copy(trackId = trackId)
         it.copyWithBase(newBase)
@@ -62,6 +62,6 @@ fun MutableStateFlow<SpotifyPlayerState>.setTrack(trackId: String) {
 }
 
 
-fun MutableStateFlow<SpotifyPlayerState>.reset() {
-    value = SpotifyPlayerState.empty()
+fun MutableStateFlow<PlayerState>.reset() {
+    value = PlayerState.empty()
 }

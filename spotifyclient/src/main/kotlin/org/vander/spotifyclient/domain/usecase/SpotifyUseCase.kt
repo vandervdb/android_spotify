@@ -6,28 +6,15 @@ import android.util.Log
 import androidx.activity.result.ActivityResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.vander.spotifyclient.domain.SpotifySessionManager
-import org.vander.spotifyclient.domain.data.CurrentlyPlayingAndQueue
+import org.vander.spotifyclient.domain.data.CurrentlyPlaying
 import org.vander.spotifyclient.domain.data.UIQueueItem
 import org.vander.spotifyclient.domain.player.ISpotifyPlayerClient
 import org.vander.spotifyclient.domain.player.repository.IPlayerStateRepository
 import org.vander.spotifyclient.domain.repository.SpotifyLibraryRepository
-import org.vander.spotifyclient.domain.state.PlayerStateData
-import org.vander.spotifyclient.domain.state.SavedRemotelyChangedState
-import org.vander.spotifyclient.domain.state.SpotifyPlayerState
-import org.vander.spotifyclient.domain.state.SpotifySessionState
-import org.vander.spotifyclient.domain.state.UIQueueState
-import org.vander.spotifyclient.domain.state.copyWithBase
-import org.vander.spotifyclient.domain.state.copyWithSaved
-import org.vander.spotifyclient.domain.state.setTrackSaved
-import org.vander.spotifyclient.domain.state.togglePause
-import org.vander.spotifyclient.domain.state.update
+import org.vander.spotifyclient.domain.state.*
 import javax.inject.Inject
 
 class SpotifyUseCase @Inject constructor(
@@ -45,11 +32,11 @@ class SpotifyUseCase @Inject constructor(
 
     private var activity: Activity? = null
 
-    private val _spotifyPlayerState =
-        MutableStateFlow<SpotifyPlayerState>(SpotifyPlayerState.empty())
-    val spotifyPlayerState: StateFlow<SpotifyPlayerState> = _spotifyPlayerState.asStateFlow()
+    private val _PlayerState =
+        MutableStateFlow<PlayerState>(PlayerState.empty())
+    val playerState: StateFlow<PlayerState> = _PlayerState.asStateFlow()
 
-    val currentUserQueue: StateFlow<CurrentlyPlayingAndQueue?> = remoteUseCase.currentUserQueue
+    val currentUserQueue: StateFlow<CurrentlyPlaying?> = remoteUseCase.currentUserQueue
 
     private val _uIQueueState = MutableStateFlow<UIQueueState>(UIQueueState.empty())
     val uIQueueState: StateFlow<UIQueueState> = _uIQueueState.asStateFlow()
@@ -79,18 +66,18 @@ class SpotifyUseCase @Inject constructor(
     }
 
     suspend fun togglePlayPause() {
-        _spotifyPlayerState.togglePause()
+        _PlayerState.togglePause()
         if (playerClient.isPlaying()) {
             playerClient.pause()
         } else {
             playerClient.resume()
         }
-        _spotifyPlayerState.togglePause()
+        _PlayerState.togglePause()
     }
 
     fun toggleSaveTrackState(trackId: String) {
-        val newSaveState = _spotifyPlayerState.value.isTrackSaved == false
-        _spotifyPlayerState.setTrackSaved(newSaveState)
+        val newSaveState = _PlayerState.value.isTrackSaved == false
+        _PlayerState.setTrackSaved(newSaveState)
     }
 
     suspend fun skipNext() {
@@ -110,7 +97,7 @@ class SpotifyUseCase @Inject constructor(
         sessionUseCase.sessionState.collect { sessionState ->
             Log.d(TAG, "Received session state: $sessionState")
             when (sessionState) {
-                is SpotifySessionState.Ready -> {
+                is SessionState.Ready -> {
                     Log.d(TAG, "Session state: Ready")
                     remoteUseCase.getAndEmitUserQueueFlow()
                     playerRepository.startListening()
@@ -194,12 +181,12 @@ class SpotifyUseCase @Inject constructor(
         Log.d(TAG, "Updating Spotify player state: $playerStateData")
         var currentTrackId = playerStateData?.trackId ?: trackId!!
         val isSaved = libraryRepository.isTrackSaved(currentTrackId).getOrDefault(false)
-        val currentPlayerState = _spotifyPlayerState.value
+        val currentPlayerState = _PlayerState.value
         Log.d(TAG, "(Spotify player state: $currentPlayerState)")
-        _spotifyPlayerState.update { currentPlayerState.copyWithSaved(isSaved) }
+        _PlayerState.update { currentPlayerState.copyWithSaved(isSaved) }
 
         if (playerStateData != null) {
-            _spotifyPlayerState.update { _spotifyPlayerState.value.copyWithBase(playerStateData) }
+            _PlayerState.update { _PlayerState.value.copyWithBase(playerStateData) }
         }
 
     }

@@ -1,12 +1,12 @@
 package org.vander.spotifyclient.domain.state
 
-data class SpotifyPlayerState(
+data class PlayerState(
     val base: PlayerStateData,
     val isTrackSaved: Boolean? = null,
 ) {
     companion object {
-        fun empty(): SpotifyPlayerState {
-            return SpotifyPlayerState(PlayerStateData.empty(), null)
+        fun empty(): PlayerState {
+            return PlayerState(PlayerStateData.empty(), null)
         }
     }
 }

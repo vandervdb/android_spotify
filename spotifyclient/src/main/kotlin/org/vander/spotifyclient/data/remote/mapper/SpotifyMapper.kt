@@ -1,29 +1,20 @@
 package org.vander.spotifyclient.data.remote.mapper
 
-import org.vander.spotifyclient.data.remote.dto.CurrentlyPlayingWithQueueDto
-import org.vander.spotifyclient.data.remote.dto.SpotifyAlbumDto
-import org.vander.spotifyclient.data.remote.dto.SpotifyArtistDto
-import org.vander.spotifyclient.data.remote.dto.SpotifyImageDto
-import org.vander.spotifyclient.data.remote.dto.SpotifyTrackDto
-import org.vander.spotifyclient.domain.data.CurrentlyPlayingAndQueue
-import org.vander.spotifyclient.domain.data.SpotifyAlbum
-import org.vander.spotifyclient.domain.data.SpotifyArtist
-import org.vander.spotifyclient.domain.data.SpotifyImage
-import org.vander.spotifyclient.domain.data.SpotifyQueue
-import org.vander.spotifyclient.domain.data.SpotifyTrack
+import org.vander.spotifyclient.data.remote.dto.*
+import org.vander.spotifyclient.domain.data.*
 
 
-fun CurrentlyPlayingWithQueueDto.toDomain(): CurrentlyPlayingAndQueue {
-    return CurrentlyPlayingAndQueue(
+fun CurrentlyPlayingWithQueueDto.toDomain(): CurrentlyPlaying {
+    return CurrentlyPlaying(
         currentlyPlaying = currentlyPlaying?.toDomain(),
-        queue = SpotifyQueue(
-            tracks = queue.map { it?.toDomain() ?: SpotifyTrack.empty() }
+        queue = Queue(
+            tracks = queue.map { it?.toDomain() ?: Track.empty() }
         )
     )
 }
 
-fun SpotifyTrackDto.toDomain(): SpotifyTrack {
-    return SpotifyTrack(
+fun TrackDto.toDomain(): Track {
+    return Track(
         album = album.toDomain(),
         artists = artists.map { it.toDomain() },
         availableMarkets = availableMarkets,
@@ -42,8 +33,8 @@ fun SpotifyTrackDto.toDomain(): SpotifyTrack {
     )
 }
 
-fun SpotifyAlbumDto.toDomain(): SpotifyAlbum {
-    return SpotifyAlbum(
+fun AlbumDto.toDomain(): Album {
+    return Album(
         albumType = albumType,
         totalTracks = totalTracks,
         availableMarkets = availableMarkets,
@@ -59,8 +50,8 @@ fun SpotifyAlbumDto.toDomain(): SpotifyAlbum {
     )
 }
 
-fun SpotifyArtistDto.toDomain(): SpotifyArtist {
-    return SpotifyArtist(
+fun ArtistDto.toDomain(): Artist {
+    return Artist(
         externalUrls = externalUrls.spotify,
         href = href,
         id = id,
@@ -70,8 +61,8 @@ fun SpotifyArtistDto.toDomain(): SpotifyArtist {
     )
 }
 
-fun SpotifyImageDto.toDomain(): SpotifyImage {
-    return SpotifyImage(
+fun ImageDto.toDomain(): Image {
+    return Image(
         url = url,
         height = height,
         width = width
