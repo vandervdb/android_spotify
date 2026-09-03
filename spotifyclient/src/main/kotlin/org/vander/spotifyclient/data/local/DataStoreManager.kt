@@ -35,6 +35,7 @@ class DataStoreManager @Inject constructor(
     override suspend fun saveAccessToken(token: String): Result<Unit> {
         return try {
             context.dataStore.edit { preferences ->
+                // TODO: logs the raw token value for local dev convenience — strip this before any shared/release build (Logcat is not a safe place for a live token)
                 Log.d(TAG, "Saving access token: $token")
                 preferences[ACCESS_TOKEN_KEY] = token
             }
