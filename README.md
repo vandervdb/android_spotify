@@ -34,9 +34,8 @@ Android project built with:
 ```bash
 AndroidApp/
 ├── app/                    # Main Compose application
-├── core_ui/                # UI components and MiniPlayer contracts
+├── core_ui/                # Shared design system (theme) and MiniPlayer contracts
 ├── spotifyclient/          # Spotify client (auth + remote control)
-├── spotifyclient-fake/     # Fake implementations of Spotify clients
 ├── spotify_fake/           # Fake MiniPlayer ViewModel and data for the UI
 ```
 
@@ -90,9 +89,8 @@ Declare the module in `settings.gradle.kts` to include it in the project.
 | Module/Library       | Description                                |
 |----------------------|--------------------------------------------|
 | `app`                | Android app using Jetpack Compose          |
-| `core_ui`            | Shared UI and MiniPlayer contracts         |
+| `core_ui`            | Shared design system (theme) and MiniPlayer contracts |
 | `spotifyclient`      | Spotify Remote connection & authentication |
-| `spotifyclient-fake` | Fakes to test without Spotify              |
 | `spotify_fake`       | Fake ViewModel and data for the UI         |
 
 </details>
