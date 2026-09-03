@@ -12,3 +12,15 @@ internal const val USER_READ_PLAYBACK_STATE = "user-read-playback-state"
 internal const val USER_READ_CURRENTLY_PLAYING = "user-read-currently-playing"
 internal const val USER_LIBRARY_MODIFY = "user-library-modify"
 internal const val USER_LIBRARY_READ = "user-library-read"
+internal const val USER_TOP_READ = "user-top-read"
+internal const val PLAYLIST_READ_PRIVATE = "playlist-read-private"
+internal const val PLAYLIST_MODIFY_PRIVATE = "playlist-modify-private"
+internal const val PLAYLIST_MODIFY_PUBLIC = "playlist-modify-public"
+internal const val STREAMING = "streaming"
+
+internal const val ALL_SCOPES =
+    "$USER_READ_PRIVATE $USER_READ_PLAYBACK_STATE " +
+            "$USER_READ_CURRENTLY_PLAYING $USER_LIBRARY_MODIFY " +
+            "$USER_LIBRARY_READ $USER_TOP_READ " +
+            "$PLAYLIST_READ_PRIVATE $PLAYLIST_MODIFY_PRIVATE " +
+            "$PLAYLIST_MODIFY_PUBLIC $STREAMING"

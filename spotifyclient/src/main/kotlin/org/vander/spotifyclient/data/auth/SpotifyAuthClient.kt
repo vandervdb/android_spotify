@@ -11,12 +11,8 @@ import com.spotify.sdk.android.auth.AuthorizationRequest
 import com.spotify.sdk.android.auth.AuthorizationResponse
 import org.vander.spotifyclient.BuildConfig
 import org.vander.spotifyclient.domain.auth.ISpotifyAuthClient
+import org.vander.spotifyclient.utils.ALL_SCOPES
 import org.vander.spotifyclient.utils.REDIRECT_URI
-import org.vander.spotifyclient.utils.USER_LIBRARY_MODIFY
-import org.vander.spotifyclient.utils.USER_LIBRARY_READ
-import org.vander.spotifyclient.utils.USER_READ_CURRENTLY_PLAYING
-import org.vander.spotifyclient.utils.USER_READ_PLAYBACK_STATE
-import org.vander.spotifyclient.utils.USER_READ_PRIVATE
 import javax.inject.Inject
 
 class SpotifyAuthClient @Inject constructor() : ISpotifyAuthClient {
@@ -44,12 +40,7 @@ class SpotifyAuthClient @Inject constructor() : ISpotifyAuthClient {
         ).apply {
             setScopes(
                 arrayOf(
-                    "streaming",
-                    USER_READ_PRIVATE,
-                    USER_READ_CURRENTLY_PLAYING,
-                    USER_READ_PLAYBACK_STATE,
-                    USER_LIBRARY_MODIFY,
-                    USER_LIBRARY_READ
+                    ALL_SCOPES
                 )
             )
             setShowDialog(true)
