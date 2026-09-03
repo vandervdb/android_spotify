@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
 import org.vander.androidapp.presentation.App
-import org.vander.androidapp.ui.theme.AndroidAppTheme
+import org.vander.coreui.theme.AndroidAppTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

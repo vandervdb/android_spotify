@@ -1,4 +1,4 @@
-package org.vander.androidapp.ui.theme
+package org.vander.coreui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

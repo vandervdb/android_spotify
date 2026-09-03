@@ -1,4 +1,4 @@
-package org.vander.androidapp.ui.theme
+package org.vander.coreui.theme
 
 import androidx.compose.ui.graphics.Color
 
