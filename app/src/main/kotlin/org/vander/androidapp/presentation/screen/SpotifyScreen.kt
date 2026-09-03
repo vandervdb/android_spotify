@@ -14,7 +14,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.vander.androidapp.R
 import org.vander.androidapp.presentation.components.MiniPlayer
 import org.vander.coreui.IMiniPlayerViewModel
 import org.vander.spotifyclient.domain.state.SessionState
@@ -56,13 +58,16 @@ fun SpotifyScreen(
             }
 
             is SessionState.Ready -> {
-                Text("✅ Connecté à Spotify Remote !")
+                Text(stringResource(R.string.spotify_screen_connected_message))
                 MiniPlayer(viewModel)
             }
 
             is SessionState.Failed -> {
                 Text(
-                    text = "❌ Erreur: ${(sessionState as SessionState.Failed).exception.message}",
+                    text = stringResource(
+                        R.string.spotify_screen_error_message,
+                        (sessionState as SessionState.Failed).exception.message ?: ""
+                    ),
                     color = MaterialTheme.colorScheme.error
                 )
             }

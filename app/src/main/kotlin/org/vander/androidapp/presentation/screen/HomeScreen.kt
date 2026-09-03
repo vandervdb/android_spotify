@@ -6,10 +6,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import org.vander.androidapp.R
 
 @Composable
 fun HomeScreen() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Home")
+        Text(stringResource(R.string.home_screen_title))
     }
 }

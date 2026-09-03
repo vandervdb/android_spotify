@@ -12,11 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.vander.androidapp.R
 import org.vander.androidapp.presentation.viewmodel.SpotifyViewModel
-import org.vander.androidapp.ui.theme.SpotifyGreen
+import org.vander.coreui.theme.SpotifyGreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +31,7 @@ fun SpotifyScreenWrapper(
                 title = {
                     Image(
                         painter = painterResource(id = R.drawable.spotify_full_logo_black),
-                        contentDescription = "Spotify Logo",
+                        contentDescription = stringResource(R.string.spotify_logo_content_description),
                         modifier = Modifier
                             .height(32.dp),
                         contentScale = ContentScale.Fit
